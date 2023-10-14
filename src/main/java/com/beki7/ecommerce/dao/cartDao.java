@@ -30,11 +30,8 @@ public class cartDao {
     public void updateCart(Cart cart) {
         this.sessionFactory.getCurrentSession().update(cart);
     }
-
     @Transactional
     public void deleteCart(Cart cart) {
         this.sessionFactory.getCurrentSession().delete(cart);
     }
-
-
 }
