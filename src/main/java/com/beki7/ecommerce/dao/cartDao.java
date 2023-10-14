@@ -26,4 +26,15 @@ public class cartDao {
         return this.sessionFactory.getCurrentSession().createQuery("from CART").list();
     }
 
+    @Transactional
+    public void updateCart(Cart cart) {
+        this.sessionFactory.getCurrentSession().update(cart);
+    }
+
+    @Transactional
+    public void deleteCart(Cart cart) {
+        this.sessionFactory.getCurrentSession().delete(cart);
+    }
+
+
 }
