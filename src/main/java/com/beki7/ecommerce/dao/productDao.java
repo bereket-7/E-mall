@@ -33,5 +33,23 @@ public class productDao {
     public Product getProduct(int id) {
         return this.sessionFactory.getCurrentSession().get(Product.class, id);
     }
+    public Product updateProduct(Product product){
+        this.sessionFactory.getCurrentSession().update(String.valueOf(Product.class),product);
+        return product;
+    }
+
+    @Transactional
+    public Boolean deletProduct(int id) {
+
+        Session session = this.sessionFactory.getCurrentSession();
+        Object persistanceInstance = session.load(Product.class, id);
+
+        if (persistanceInstance != null) {
+            session.delete(persistanceInstance);
+            return true;
+        }
+        return false;
+    }
+
 
 }
