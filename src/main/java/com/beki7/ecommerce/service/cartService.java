@@ -18,5 +18,12 @@ public class cartService {
     public List<Cart> getCarts(){
         return this.cartDao.getCarts();
     }
+    public void updateCart(Cart cart){
+        cartDao.updateCart(cart);
+    }
+    public void deleteCart(Cart cart)
+    {
+        cartDao.deleteCart(cart);
+    }
 
 }
