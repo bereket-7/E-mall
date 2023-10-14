@@ -86,4 +86,8 @@ public class Product {
         this.description = description;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private User customer;
+
 }
