@@ -1,11 +1,21 @@
 package com.beki7.ecommerce.controller;
 
+import com.beki7.ecommerce.model.Product;
+import com.beki7.ecommerce.model.User;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.beki7.ecommerce.service.userService;
 import com.beki7.ecommerce.service.productService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -26,12 +36,39 @@ public class UserController {
         return "buy";
     }
 
-
     @GetMapping("/")
     public String userlogin(Model model) {
 
         return "userLogin";
     }
+    @RequestMapping(value = "userloginvalidate", method = RequestMethod.POST)
+    public ModelAndView userlogin(@RequestParam("username") String username, @RequestParam("password") String pass, Model model, HttpServletResponse res) {
+
+        System.out.println(pass);
+        User u = this.userService.checkLogin(username, pass);
+        System.out.println(u.getUsername());
+        if(u.getUsername().equals(username)) {
+
+            res.addCookie(new Cookie("username", u.getUsername()));
+            ModelAndView mView  = new ModelAndView("index");
+            mView.addObject("user", u);
+            List<Product> products = this.productService.getProducts();
+
+            if (products.isEmpty()) {
+                mView.addObject("message", "No products are available");
+            } else {
+                mView.addObject("products", products);
+            }
+            return mView;
+
+        }else {
+            ModelAndView mView = new ModelAndView("userLogin");
+            mView.addObject("message", "Please enter correct email and password");
+            return mView;
+        }
+
+    }
+
 
 
 
