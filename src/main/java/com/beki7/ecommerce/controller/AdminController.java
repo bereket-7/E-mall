@@ -188,10 +188,23 @@ public class AdminController {
         this.productService.deleteProduct(id);
         return "redirect:/admin/products";
     }
-
     @PostMapping("products")
     public String postproduct() {
         return "redirect:/admin/categories";
     }
+    @GetMapping("customers")
+    public ModelAndView getCustomerDetail() {
+        if(adminlogcheck==0){
+            ModelAndView mView = new ModelAndView("adminlogin");
+            return mView;
+        }
+        else {
+            ModelAndView mView = new ModelAndView("displayCustomers");
+            List<User> users = this.userService.getUsers();
+            mView.addObject("customers", users);
+            return mView;
+        }
+    }
+
 
 }
