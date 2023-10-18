@@ -58,7 +58,7 @@ public class AdminController {
     @GetMapping("Dashboard")
     public String adminHome(Model model) {
         if(adminlogcheck==1)
-            return "adminHome";
+            return "adminHome.jsp";
         else
             return "redirect:/admin/login";
     }
@@ -74,7 +74,7 @@ public class AdminController {
         User user=this.userService.checkLogin(username, pass);
 
         if(user.getRole().equals("ROLE_ADMIN")) {
-            ModelAndView mv = new ModelAndView("adminHome");
+            ModelAndView mv = new ModelAndView("adminHome.jsp");
             adminlogcheck=1;
             mv.addObject("admin", user);
             return mv;
