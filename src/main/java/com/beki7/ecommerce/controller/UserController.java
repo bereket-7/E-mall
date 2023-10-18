@@ -22,7 +22,8 @@ public class UserController {
     private userService userService;
     @Autowired
     private productService productService;
-
+    @Autowired
+    private cartService cartService;
     @GetMapping("/register")
     public String registerUser() {
         return "register";
@@ -94,9 +95,10 @@ public class UserController {
     public ModelAndView getCartDetail() {
         ModelAndView mv = new ModelAndView();
         List<Cart> carts = cartService.getCarts();
-        return carts;
+        mv.addObject("carts", carts);
+        mv.setViewName("cartDetail");
+        return mv;
     }
-
 
 
 }
