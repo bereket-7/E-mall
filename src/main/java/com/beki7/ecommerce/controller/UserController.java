@@ -66,7 +66,22 @@ public class UserController {
             mView.addObject("message", "Please enter correct email and password");
             return mView;
         }
+    }
 
+    @GetMapping("/user/products")
+    public ModelAndView getproduct() {
+
+        ModelAndView mView = new ModelAndView("uproduct");
+
+        List<Product> products = this.productService.getProducts();
+
+        if(products.isEmpty()) {
+            mView.addObject("message","No products are available");
+        }else {
+            mView.addObject("products",products);
+        }
+
+        return mView;
     }
 
 
