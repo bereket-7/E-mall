@@ -1,4 +1,5 @@
 package com.beki7.ecommerce.controller;
+
 import com.beki7.ecommerce.model.User;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ import com.beki7.ecommerce.service.productService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import com.beki7.ecommerce.model.Category;
+
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -76,6 +81,31 @@ public class AdminController {
             ModelAndView mv = new ModelAndView("adminlogin");
             mv.addObject("message", "Please enter correct username and password");
             return mv;
+        }
+    }
+    @GetMapping("categories")
+    public ModelAndView getcategory() {
+        if(adminlogcheck==0){
+            ModelAndView mView = new ModelAndView("adminlogin");
+            return mView;
+        }
+        else {
+            ModelAndView mView = new ModelAndView("categories");
+            List<Category> categories = this.categoryService.getCategories();
+            mView.addObject("categories", categories);
+            return mView;
+        }
+    }
+    @RequestMapping(value = "categories",method = RequestMethod.POST)
+    public String addCategory(@RequestParam("categoryname") String category_name)
+    {
+        System.out.println(category_name);
+
+        Category category =  this.categoryService.addCategory(category_name);
+        if(category.getName().equals(category_name)) {
+            return "redirect:categories";
+        }else {
+            return "redirect:categories";
         }
     }
 
