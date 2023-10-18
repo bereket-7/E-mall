@@ -11,6 +11,10 @@ import com.beki7.ecommerce.service.categoryService;
 import com.beki7.ecommerce.service.productService;
 import org.springframework.web.servlet.ModelAndView;
 import com.beki7.ecommerce.model.Category;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.util.List;
 
@@ -205,6 +209,37 @@ public class AdminController {
             return mView;
         }
     }
+    @GetMapping("profileDisplay")
+    public String profileDisplay(Model model) {
+        String displayUsername, displayPassword, displayEmail, displayAddress;
+        String usernameForClass = "sampleUsername";
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Emall", "postgres", "password");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+            stmt.setString(1, usernameForClass);
+            ResultSet rst = stmt.executeQuery();
 
+            if (rst.next()) {
+                int userId = rst.getInt(1);
+                displayUsername = rst.getString(2);
+                displayEmail = rst.getString(3);
+                displayPassword = rst.getString(4);
+                displayAddress = rst.getString(5);
+                model.addAttribute("userId", userId);
+                model.addAttribute("username", displayUsername);
+                model.addAttribute("email", displayEmail);
+                model.addAttribute("password", displayPassword);
+                model.addAttribute("address", displayAddress);
+            }
 
+            rst.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+        System.out.println("Hello");
+        return "updateProfile";
+    }
 }
