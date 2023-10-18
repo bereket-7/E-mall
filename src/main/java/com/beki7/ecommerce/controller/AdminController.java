@@ -182,5 +182,16 @@ public class AdminController {
     {
         return "redirect:/admin/products";
     }
+    @GetMapping("products/delete")
+    public String removeProduct(@RequestParam("id") int id)
+    {
+        this.productService.deleteProduct(id);
+        return "redirect:/admin/products";
+    }
+
+    @PostMapping("products")
+    public String postproduct() {
+        return "redirect:/admin/categories";
+    }
 
 }
