@@ -38,5 +38,22 @@ public class AdminController {
         }
 
     }
+    @GetMapping("login")
+    public String adminlogin() {
+
+        return "adminlogin";
+    }
+    @GetMapping("Dashboard")
+    public String adminHome(Model model) {
+        if(adminlogcheck==1)
+            return "adminHome";
+        else
+            return "redirect:/admin/login";
+    }
+    @GetMapping("/loginvalidate")
+    public String adminlog(Model model) {
+
+        return "adminlogin";
+    }
 
 }
