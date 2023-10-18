@@ -116,6 +116,13 @@ public class AdminController {
         return mView;
     }
 
+    @GetMapping("categories/update")
+    public String updateCategory(@RequestParam("categoryid") int id, @RequestParam("categoryname") String categoryname)
+    {
+        Category category = this.categoryService.updateCategory(id, categoryname);
+        return "redirect:/admin/categories";
+    }
+
 
 
 }
