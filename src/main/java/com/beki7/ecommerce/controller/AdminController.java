@@ -212,7 +212,7 @@ public class AdminController {
     @GetMapping("profileDisplay")
     public String profileDisplay(Model model) {
         String displayUsername, displayPassword, displayEmail, displayAddress;
-        String usernameForClass = "sampleUsername";
+        String usernameForClass = "username";
         try {
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Emall", "postgres", "password");
@@ -241,5 +241,28 @@ public class AdminController {
         }
         System.out.println("Hello");
         return "updateProfile";
+    }
+    @RequestMapping(value = "updateuser",method=RequestMethod.POST)
+    public String updateUserProfile(@RequestParam("userid") int userid,@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("address") String address)
+
+    {
+        try
+        {
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Emall", "postgres", "password");
+            PreparedStatement pst = con.prepareStatement("update users set username= ?,email = ?,password= ?, address= ? where uid = ?;");
+            pst.setString(1, username);
+            pst.setString(2, email);
+            pst.setString(3, password);
+            pst.setString(4, address);
+            pst.setInt(5, userid);
+            int i = pst.executeUpdate();
+            usernameforclass = username;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception:"+e);
+        }
+        return "redirect:/index";
     }
 }
