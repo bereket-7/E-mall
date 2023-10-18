@@ -1,4 +1,5 @@
 package com.beki7.ecommerce.controller;
+import com.beki7.ecommerce.model.User;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.beki7.ecommerce.service.userService;
 import com.beki7.ecommerce.service.categoryService;
 import com.beki7.ecommerce.service.productService;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -55,5 +60,25 @@ public class AdminController {
 
         return "adminlogin";
     }
+
+    @RequestMapping(value = "loginvalidate", method = RequestMethod.POST)
+    public ModelAndView adminlogin(@RequestParam("username") String username, @RequestParam("password") String pass) {
+
+        User user=this.userService.checkLogin(username, pass);
+
+        if(user.getRole().equals("ROLE_ADMIN")) {
+            ModelAndView mv = new ModelAndView("adminHome");
+            adminlogcheck=1;
+            mv.addObject("admin", user);
+            return mv;
+        }
+        else {
+            ModelAndView mv = new ModelAndView("adminlogin");
+            mv.addObject("message", "Please enter correct username and password");
+            return mv;
+        }
+    }
+
+
 
 }
