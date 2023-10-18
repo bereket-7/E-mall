@@ -146,6 +146,13 @@ public class AdminController {
         }
 
     }
+    @GetMapping("products/add")
+    public ModelAndView addProduct() {
+        ModelAndView mView = new ModelAndView("productsAdd");
+        List<Category> categories = this.categoryService.getCategories();
+        mView.addObject("categories",categories);
+        return mView;
+    }
 
 
 }
