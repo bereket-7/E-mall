@@ -1,7 +1,8 @@
 package com.beki7.ecommerce.controller;
-
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.beki7.ecommerce.service.userService;
 import com.beki7.ecommerce.service.categoryService;
@@ -25,6 +26,17 @@ public class AdminController {
         adminlogcheck =0;
         usernameforclass = "";
         return "userLogin";
+    }
+
+    @GetMapping("/index")
+    public String index(Model model) {
+        if(usernameforclass.equalsIgnoreCase(""))
+            return "userLogin";
+        else {
+            model.addAttribute("username", usernameforclass);
+            return "index";
+        }
+
     }
 
 }
