@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import com.beki7.ecommerce.service.userService;
 import com.beki7.ecommerce.service.productService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -84,6 +81,14 @@ public class UserController {
         return mView;
     }
 
+    @RequestMapping(value = "newuserregister", method = RequestMethod.POST)
+    public String newUseRegister(@ModelAttribute User user)
+    {
+        System.out.println(user.getEmail());
+        user.setRole("ROLE_NORMAL");
+        this.userService.addUser(user);
+        return "redirect:/";
+    }
 
 
 
