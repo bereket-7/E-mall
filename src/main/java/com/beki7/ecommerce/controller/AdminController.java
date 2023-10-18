@@ -17,4 +17,14 @@ public class AdminController {
 
     @Autowired
     private productService productService;
+
+    int adminlogcheck = 0;
+    String usernameforclass = "";
+    @RequestMapping(value = {"/","/logout"})
+    public String returnIndex() {
+        adminlogcheck =0;
+        usernameforclass = "";
+        return "userLogin";
+    }
+
 }
