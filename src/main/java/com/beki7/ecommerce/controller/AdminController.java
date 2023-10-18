@@ -1,5 +1,6 @@
 package com.beki7.ecommerce.controller;
 
+import com.beki7.ecommerce.model.Product;
 import com.beki7.ecommerce.model.User;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,6 +124,28 @@ public class AdminController {
         return "redirect:/admin/categories";
     }
 
+
+    //*****  Product management ********//
+
+    @GetMapping("products")
+    public ModelAndView getproduct() {
+        if(adminlogcheck==0){
+            ModelAndView mView = new ModelAndView("adminlogin");
+            return mView;
+        }
+        else {
+            ModelAndView mView = new ModelAndView("products");
+            List<Product> products = this.productService.getProducts();
+
+            if (products.isEmpty()) {
+                mView.addObject("message", "No products are available");
+            } else {
+                mView.addObject("products", products);
+            }
+            return mView;
+        }
+
+    }
 
 
 }
