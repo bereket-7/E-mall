@@ -5,13 +5,10 @@ import com.beki7.ecommerce.model.User;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.beki7.ecommerce.service.userService;
 import com.beki7.ecommerce.service.categoryService;
 import com.beki7.ecommerce.service.productService;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.beki7.ecommerce.model.Category;
 
@@ -168,5 +165,16 @@ public class AdminController {
         product.setQuantity(quantity);
         this.productService.addProduct(product);
         return "redirect:/admin/products";
+    }
+    @GetMapping("products/update/{id}")
+    public ModelAndView updateproduct(@PathVariable("id") int id) {
+
+        ModelAndView mView = new ModelAndView("productsUpdate");
+        Product product = this.productService.getProduct(id);
+        List<Category> categories = this.categoryService.getCategories();
+
+        mView.addObject("categories",categories);
+        mView.addObject("product", product);
+        return mView;
     }
 }
