@@ -177,4 +177,10 @@ public class AdminController {
         mView.addObject("product", product);
         return mView;
     }
+    @RequestMapping(value = "products/update/{id}",method=RequestMethod.POST)
+    public String updateProduct(@PathVariable("id") int id ,@RequestParam("name") String name,@RequestParam("categoryid") int categoryId ,@RequestParam("price") int price,@RequestParam("weight") int weight, @RequestParam("quantity")int quantity,@RequestParam("description") String description,@RequestParam("productImage") String productImage)
+    {
+        return "redirect:/admin/products";
+    }
+
 }
