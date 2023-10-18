@@ -108,6 +108,13 @@ public class AdminController {
             return "redirect:categories";
         }
     }
+    @GetMapping("categories/delete")
+    public ModelAndView removeCategoryDb(@RequestParam("id") int id)
+    {
+        this.categoryService.deleteCategory(id);
+        ModelAndView mView = new ModelAndView("forward:/categories");
+        return mView;
+    }
 
 
 
