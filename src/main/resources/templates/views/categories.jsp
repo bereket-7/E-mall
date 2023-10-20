@@ -45,3 +45,41 @@
 			</div>
 		</div>
 	</nav><br>
+	<div class="container">
+
+
+
+    		<!-- Button trigger modal -->
+    		<button type="button" style="margin: 20px 0" class="btn btn-primary"
+    			data-toggle="modal" data-target="#exampleModalCenter">Add
+    			Category</button>
+
+    		<!-- Modal -->
+    		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+    			role="dialog" aria-labelledby="exampleModalCenterTitle"
+    			aria-hidden="true">
+    			<div class="modal-dialog modal-dialog-centered" role="document">
+    				<div class="modal-content">
+    					<form action="categories" method="post">
+    						<div class="modal-header">
+    							<h5 class="modal-title" id="exampleModalLongTitle">Add New
+    								Category</h5>
+    							<button type="button" class="close" data-dismiss="modal"
+    								aria-label="Close">
+    								<span aria-hidden="true">&times;</span>
+    							</button>
+    						</div>
+    						<div class="modal-body  text-center">
+    							<input type="text" name="categoryname" class="form-control"
+    								id="name" required="required" placeholder="Category name">
+    						</div>
+    						<div class="modal-footer">
+    							<button type="button" class="btn btn-secondary"
+    								data-dismiss="modal">Close</button>
+    							<input type="submit" value="Save Changes" class="btn btn-primary">
+    						</div>
+    					</form>
+    				</div>
+    			</div>
+    		</div><br>
+
