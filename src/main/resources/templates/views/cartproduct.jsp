@@ -44,3 +44,87 @@
 			</div>
 		</div>
 	</nav><br>
+
+	<div class="container-fluid">
+
+    		<a style="margin: 20px 0" class="btn btn-primary"
+    			href="/user/products">Add Product</a><br>
+    		<table class="table">
+
+    			<tr>
+    				<th scope="col">id</th>
+    				<th scope="col">Product Name</th>
+    				<th scope="col">Price</th>
+    				<th scope="col">Description</th>
+    				<th scope="col">Delete</th>
+
+    			</tr>
+    			<tbody>
+    				<tr>
+
+    					<%
+    					try {
+    						String url = "jdbc:mysql://localhost:3306/springproject";
+    						Class.forName("com.mysql.cj.jdbc.Driver");
+    						Connection con = DriverManager.getConnection(url, "root", "");
+    						Statement stmt = con.createStatement();
+    						Statement stmt2 = con.createStatement();
+    						ResultSet rs = stmt.executeQuery("select * from cart");
+    					%>
+    					<%
+    					while (rs.next()) {
+    					%>
+    					<td>
+    						<%= rs.getInt(1) %>
+    					</td>
+    					<td>
+    						<%= rs.getString(2) %>
+    					</td>
+    					<td>
+    						<%= rs.getString(3) %>
+
+    					</td>
+    					<td>
+    						<%= rs.getString(4) %>
+
+    					</td>
+
+
+
+    					<td>
+    					<form action="cart/delete" method="get">
+    							<input type="hidden" name="id" value="<%=rs.getInt(1)%>">
+    							<input type="submit" value="Delete" class="btn btn-danger">
+    					</form>
+    					</td>
+
+
+    				</tr>
+    				<%
+    				}
+    				%>
+
+    			</tbody>
+    		</table>
+    		<%
+    		} catch (Exception ex) {
+    		out.println("Exception Occurred:: " + ex.getMessage());
+    		}
+    		%>
+    	</div>
+
+
+
+    	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    		crossorigin="anonymous"></script>
+    	<script
+    		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    		crossorigin="anonymous"></script>
+    	<script
+    		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    		crossorigin="anonymous"></script>
+    </body>
+    </html>
