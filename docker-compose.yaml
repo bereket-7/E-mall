@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: emall_productdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5432:5432"
 
@@ -14,7 +14,7 @@ services:
     environment:
       POSTGRES_DB: emall_orderdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5433:5432"
 
@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_DB: emall_userdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5434:5432"
 
@@ -32,7 +32,7 @@ services:
     environment:
       POSTGRES_DB: emall_inventorydb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5435:5432"
 
@@ -41,7 +41,7 @@ services:
     environment:
       POSTGRES_DB: emall_paymentdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5436:5432"
 
@@ -50,7 +50,7 @@ services:
     environment:
       POSTGRES_DB: emall_notificationdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: 8915code
     ports:
       - "5437:5432"
 
