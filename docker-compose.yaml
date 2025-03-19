@@ -3,30 +3,108 @@ services:
   productdb:
     image: postgres:13
     environment:
-      POSTGRES_DB: productdb
+      POSTGRES_DB: emall_productdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
 
+  orderdb:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: emall_orderdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+
+  userdb:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: emall_userdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+
+  inventorydb:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: emall_inventorydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+
+  paymentdb:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: emall_paymentdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5436:5432"
+
+  notificationdb:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: emall_notificationdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5437:5432"
+
   product-service:
     build: ./product-service
     ports:
-      - "8081:8081"
+      - "8091:8091"
     depends_on:
       - productdb
 
   order-service:
     build: ./order-service
     ports:
-      - "8082:8082"
+      - "8092:8092"
     depends_on:
+      - orderdb
       - product-service
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8093:8093"
+    depends_on:
+      - userdb
+
+  inventory-service:
+    build: ./inventory-service
+    ports:
+      - "8094:8094"
+    depends_on:
+      - inventorydb
+
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "8095:8095"
+    depends_on:
+      - paymentdb
+
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "8096:8096"
+    depends_on:
+      - notificationdb
 
   api-gateway:
     build: ./api-gateway
     ports:
-      - "8080:8080"
+      - "8090:8090"
     depends_on:
       - product-service
       - order-service
+      - user-service
+      - inventory-service
+      - payment-service
+      - notification-service
