@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.4</version>
+		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.beki7</groupId>
-	<artifactId>ecommerce</artifactId>
+	<groupId>com.beki7.ecommerce</groupId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ecommerce</name>
-	<description>E-commerce web app using Spring Boot</description>
+	<name>product-service</name>
+	<description>Product Microservice for E-MALL application</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
